@@ -1,0 +1,48 @@
+class Solution {
+public:
+  
+    void nextPermutation(vector<int>& nums) 
+    {
+        
+        int i,j,a=0,k;
+        for(i=nums.size()-2;i>=0;i--)
+        {                            //start searching from backside for a number which is smaller than its next one 
+            if(nums[i]<nums[i+1])
+            {
+                break;
+            }
+            else
+            {
+                continue;
+            }
+            
+            
+        }                   //that num exists at nums[i]......
+        if(i<0)
+        {               //if no num exists..means the given permutation is the last one...hence just reverse it to get the 1st permutation
+            reverse(nums.begin(),nums.end());
+            
+        }
+        
+        else
+        {                           //after this index "i" now find a num which is smallest 
+            for(k=nums.size()-1;k>i;k--)
+            {
+                if(nums[k]>nums[i])
+                {
+                    break;
+                }
+            }
+            //swap that smallest num with nums[i]
+            int t=nums[k];
+            nums[k]=nums[i];
+            nums[i]=t;
+                
+        }
+                // sort the remaining array after index "i"
+        sort(nums.begin()+i+1,nums.end());
+        
+        
+        
+    }
+};
