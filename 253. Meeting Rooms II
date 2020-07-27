@@ -1,0 +1,25 @@
+#include <functional>
+int Solution::solve(vector<vector<int> > &A) 
+{
+    int count=1;
+    sort(A.begin(),A.end(),[](auto &left, auto &right){return left[0]<=right[0];});
+  
+    priority_queue<int, vector<int>, greater<int>> q;
+    q.push(A[0][1]);
+    for(int i=1;i<A.size();i++)
+    {
+        if(A[i][0]>=q.top())
+        {
+            q.pop();
+         
+        }
+        else
+        {
+            count++;
+            
+        }
+        q.push(A[i][1]);
+        
+    }
+    return count;
+}
