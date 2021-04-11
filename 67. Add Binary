@@ -1,0 +1,88 @@
+class Solution
+{
+public:
+
+  string addStrings (string big, string small)
+  {
+    int i = small.length () - 1;
+    int carry = 0;
+    string ans = "";
+
+    while (i >= 0)
+      {
+	//   using ASCII values of 0,1 to check the bits
+	if (int (big.at (i)) == 49 && int (small.at (i)) == 49)
+	  {
+	    if (carry == 1)
+	      {
+		ans = "1" + ans;
+	      }
+	    else
+	      {
+		ans = "0" + ans;
+	      }
+	    carry = 1;
+
+	  }
+	else if (int (big.at (i)) == 49 || int (small.at (i)) == 49)
+	  {
+	    if (carry == 1)
+	      {
+		ans = "0" + ans;
+		carry = 1;
+	      }
+	    else
+	      {
+		ans = "1" + ans;
+	      }
+	  }
+	else
+	  {
+	    if (carry == 1)
+	      {
+		ans = "1" + ans;
+		carry = 0;
+	      }
+	    else
+	      {
+		ans = "0" + ans;
+	      }
+	  }
+
+	i--;
+      }
+    //just checking if carry is left at final stage
+    if (carry == 1)
+      {
+	ans = "1" + ans;
+      }
+    return ans;
+
+  }
+
+
+  string addBinary (string A, string B)
+  {
+    string sum;
+    //make both strings' length equal
+    if (A.length () >= B.length ())
+      {
+	int diff = A.size () - B.length ();
+	while (diff--)
+	  {
+	    B = "0" + B;
+	  }
+      }
+    else
+      {
+	int diff = B.size () - A.length ();
+	//cout<<"len"<<diff<<endl;
+	while (diff--)
+	  {
+	    A = "0" + A;
+	  }
+      }
+    return (addStrings (A, B));
+
+  }
+};
